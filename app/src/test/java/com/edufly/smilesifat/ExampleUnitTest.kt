@@ -1,4 +1,4 @@
-package com.example.edufly
+package com.edufly.smilesifat
 
 import org.junit.Test
 
