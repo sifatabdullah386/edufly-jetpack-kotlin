@@ -16,49 +16,21 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.edufly.smilesifat.model.TabItem
 import com.edufly.smilesifat.theme.colorBLack
 import com.edufly.smilesifat.theme.colorBackground
+import com.edufly.smilesifat.viewmodel.CategoryViewModel
+import com.example.edufly.R
 
 @Preview
 @Composable
 fun TabLayout() {
-    val tabItems = listOf(
-        TabItem(
-            title = "All Courses"
-        ),
-        TabItem(
-            title = "Science"
-        ),
-        TabItem(
-            title = "Commerce"
-        ),
-        TabItem(
-            title = "Arts"
-        ),
-        TabItem(
-            title = "CSE"
-        ),
-        TabItem(
-            title = "EEE"
-        ),
-        TabItem(
-            title = "ME"
-        ),
-        TabItem(
-            title = "Robotics"
-        ),
-        TabItem(
-            title = "ECE"
-        ),
-        TabItem(
-            title = "ES"
-        ),
-    )
+    val tabItems = CategoryViewModel()
 
     var selectedTabIndex by rememberSaveable { mutableIntStateOf(0) }
 
@@ -91,7 +63,7 @@ fun TabLayout() {
                     Text(
                         text = item.title, style = TextStyle(
                             fontSize = 14.sp,
-//                        fontFamily = FontFamily(Font(R.font.open sans)),
+                        fontFamily = FontFamily(Font(R.font.poppins_medium)),
                             fontWeight = FontWeight(600),
                             color = colorBLack,
                         )

@@ -26,6 +26,15 @@ fun CoursesViewModel(): MutableList<CoursesItems> {
         reviews = "",
         rate = "",
         price = ""))
+    courseList.add(CoursesItems(isFav = R.drawable.baseline_favorite_24,
+        img = R.drawable.ic_chemistry,
+        backColor = colorYellow,
+        subHeading = "",
+        subColor = colorYellowDark,
+        heading = "",
+        reviews = "",
+        rate = "",
+        price = ""))
 
     return courseList
 }

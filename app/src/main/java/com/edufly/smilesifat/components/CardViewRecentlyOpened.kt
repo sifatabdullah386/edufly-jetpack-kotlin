@@ -27,7 +27,7 @@ import androidx.compose.ui.unit.dp
 
 @Preview
 @Composable
-fun MyUI() {
+fun CardViewRecentlyOpened() {
     val optionsList = prepareOptionsList()
     LazyRow(
         horizontalArrangement = Arrangement.spacedBy(space = 12.dp),
