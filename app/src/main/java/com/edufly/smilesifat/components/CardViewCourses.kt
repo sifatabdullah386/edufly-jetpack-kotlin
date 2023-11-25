@@ -24,6 +24,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.semantics.Role.Companion.Button
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -43,7 +44,8 @@ fun CardViewCourses(
         modifier = Modifier
             .height(270.dp)
             .width(180.dp)
-            .fillMaxWidth().padding(end = 7.dp),
+            .fillMaxWidth()
+            .padding(end = 7.dp),
         elevation = CardDefaults.cardElevation(
             defaultElevation = 0.dp
         ),
@@ -172,11 +174,12 @@ fun CardViewCourses(
                     ),
                 )
             }
+
             Text(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(30.dp)
-                    .padding(start = 15.dp, end = 15.dp, top = 10.dp)
+                    .height(32.dp)
+                    .padding(15.dp, 15.dp, 10.dp)
                     .background(colorPrimary, RoundedCornerShape(size = 10.dp)),
                 text = "Enroll Now",
                 style = TextStyle(

@@ -164,10 +164,12 @@ fun Home() {
 //                    RecentlyOpenedCardView()
                 }
 
-                Row(modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 10.dp, bottom = 10.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(top = 10.dp, bottom = 10.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                ) {
                     Text(
                         modifier = Modifier
                             .wrapContentWidth(),
@@ -180,11 +182,9 @@ fun Home() {
                         )
                     )
                     Text(
-                        modifier = Modifier
-                            .wrapContentWidth(),
                         text = "View All",
                         style = TextStyle(
-                            fontSize = 16.sp,
+                            fontSize = 12.sp,
                             fontFamily = FontFamily(Font(R.font.poppins_bold)),
                             fontWeight = FontWeight(600),
                             color = colorPrimary

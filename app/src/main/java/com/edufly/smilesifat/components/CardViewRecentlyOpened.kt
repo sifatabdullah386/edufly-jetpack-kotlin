@@ -1,92 +1,195 @@
 package com.edufly.smilesifat.components
 
 import android.content.Context
-import android.widget.Toast
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Favorite
-import androidx.compose.material.icons.outlined.Notifications
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.Icon
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.edufly.smilesifat.model.CoursesItems
+import com.edufly.smilesifat.theme.colorPrimary
+import com.edufly.smilesifat.theme.colorWhite
+import com.example.edufly.R
 
-@Preview
-@Composable
-fun CardViewRecentlyOpened() {
-    val optionsList = prepareOptionsList()
-    LazyRow(
-        horizontalArrangement = Arrangement.spacedBy(space = 12.dp),
-        contentPadding = PaddingValues(horizontal = 8.dp, vertical = 12.dp)
-    ) {
-        items(optionsList.size) { item ->
-            optionsList.forEachIndexed { index, item ->
-                ItemLayout(optionsList = item)
-            }
-        }
-    }
-}
 
-// single item layout
 @Composable
-private fun ItemLayout(
-    optionsList: OptionsList,
-    context: Context = LocalContext.current.applicationContext
+fun CardViewRecentlyOpened(coursesItems: CoursesItems,
+                           context: Context = LocalContext.current.applicationContext
 ) {
     Card(
-        shape = RoundedCornerShape(size = 12.dp),
-        // if you are using Material 2, change the following to elevation = 4.dp
+        modifier = Modifier
+            .height(270.dp)
+            .width(180.dp)
+            .fillMaxWidth()
+            .padding(end = 7.dp),
         elevation = CardDefaults.cardElevation(
-            defaultElevation = 4.dp
-        )
+            defaultElevation = 0.dp
+        ),
+        shape = RoundedCornerShape(size = 10.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = coursesItems.backColor,
+        ),
     ) {
-        Box(
+        Column() {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .wrapContentHeight(),
+                horizontalArrangement = Arrangement.End
+            ) {
+                Image(
+                    modifier = Modifier
+                        .wrapContentWidth()
+                        .wrapContentHeight()
+                        .padding(all = 8.dp),
+                    alignment = Alignment.Center,
+                    painter = painterResource(coursesItems.isFav),
+                    contentDescription = null,
+                    contentScale = ContentScale.Crop
+                )
+            }
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .wrapContentHeight(),
+                horizontalArrangement = Arrangement.Center
+            ) {
+                Image(
+                    modifier = Modifier
+                        .height(90.dp)
+                        .width(90.dp),
+                    painter = painterResource(coursesItems.img),
+                    contentDescription = null,
+                    contentScale = ContentScale.Crop,
+                    alignment = Alignment.Center
+                )
+            }
+        }
+
+        Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .clickable {
-                    Toast
-                        .makeText(context, optionsList.option, Toast.LENGTH_SHORT)
-                        .show()
-                }
-                .padding(all = 8.dp),
+                .height(60.dp)
+                .padding(top = 15.dp, bottom = 0.dp)
+                .background(coursesItems.subColor),
+            verticalAlignment = Alignment.CenterVertically
         ) {
-            Icon(
-                modifier = Modifier.size(size = 36.dp),
-                imageVector = optionsList.icon,
-                contentDescription = null,
-                tint = Color(0xFF7850E8)
+            Text(
+                modifier = Modifier.padding(start = 7.dp),
+                text = coursesItems.subHeading,
+                fontSize = 10.sp,
+                fontWeight = FontWeight.Bold,
+                color = Color.Black,
+                maxLines = 2
+            )
+        }
+        Column(
+            modifier = Modifier
+                .fillMaxHeight()
+                .background(Color.White)
+        ) {
+            Text(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 5.dp, top = 5.dp),
+                text = coursesItems.heading,
+                style = TextStyle(
+                    fontSize = 12.sp,
+//                    fontFamily = FontFamily(Font(R.font.open sans)),
+                    fontWeight = FontWeight(600),
+                    color = Color(0xFF000000),
+                ),
+                maxLines = 1
+            )
+            Row(
+                modifier = Modifier
+                    .wrapContentWidth(),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Text(
+                    modifier = Modifier
+                        .wrapContentWidth()
+                        .padding(start = 5.dp),
+                    text = coursesItems.reviews,
+                    style = TextStyle(
+                        fontSize = 10.sp,
+//                    fontFamily = FontFamily(Font(R.font.open sans)),
+                        fontWeight = FontWeight(400),
+                        color = Color(0xFF000000),
+                    ),
+                    maxLines = 1
+                )
+                Image(
+                    modifier = Modifier
+                        .wrapContentWidth()
+                        .padding(start = 5.dp, end = 3.dp),
+                    painter = painterResource(id = R.drawable.baseline_star_rate_24),
+                    contentDescription = "image description",
+                    contentScale = ContentScale.None
+                )
+                Text(
+                    text = coursesItems.rate,
+                    style = TextStyle(
+                        fontSize = 10.sp,
+//                        fontFamily = FontFamily(Font(R.font.open sans)),
+                        fontWeight = FontWeight(400),
+                        color = Color(0xFF000000),
+                    )
+                )
+                Text(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(end = 5.dp),
+                    text = coursesItems.price,
+                    style = TextStyle(
+                        fontSize = 14.sp,
+//                        fontFamily = FontFamily(Font(R.font.open sans)),
+                        fontWeight = FontWeight(600),
+                        color = Color(0xFF000000),
+                        textAlign = TextAlign.End
+                    ),
+                )
+            }
+
+            Text(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(32.dp)
+                    .padding(15.dp, 15.dp, 10.dp)
+                    .background(colorPrimary, RoundedCornerShape(size = 10.dp)),
+                text = "Enroll Now",
+                style = TextStyle(
+                    fontSize = 12.sp,
+//                        fontFamily = FontFamily(Font(R.font.open sans)),
+                    fontWeight = FontWeight(600),
+                    color = colorWhite,
+                    textAlign = TextAlign.Center
+                ),
             )
         }
     }
 }
-
-// add items to the list
-private fun prepareOptionsList(): MutableList<OptionsList> {
-    val optionsList = mutableListOf<OptionsList>()
-
-    optionsList.add(OptionsList(icon = Icons.Outlined.Favorite, option = "Saved Items"))
-    optionsList.add(
-        OptionsList(
-            icon = Icons.Outlined.Notifications,
-            option = "Previous Notifications"
-        )
-    )
-
-    return optionsList
-}
-
-data class OptionsList(val icon: ImageVector, val option: String)
